@@ -5,10 +5,10 @@ public class HealthSystem : MonoBehaviour, IDamagable
 {
     public event Action OnHealthUpdated;
     public event Action OnHealthEmpty;
-    public int maxHealth { get; private set; }
+    public float maxHealth { get; private set; }
 
-    private int Health;
-    public int health
+    private float Health;
+    public float health
     {
         get => Health;
         protected set
@@ -20,23 +20,23 @@ public class HealthSystem : MonoBehaviour, IDamagable
 
     //public int damagaReduction;
 
-    public void GainMaxHealt(int _maxHealth)
+    public void SetMaxHealt(float _maxHealth, float _healthModifier)
     {
-        maxHealth += _maxHealth;
-        health += _maxHealth;
+        maxHealth = _maxHealth * _healthModifier;
+        health *= _healthModifier;
     }
-    public void ResetHealth(int _maxHealth)
+    public void ResetHealth(float _maxHealth)
     {
         maxHealth = _maxHealth;
         health = maxHealth;
     }
 
-    public void TakeHeal(int _heal)
+    public void TakeHeal(float _heal)
     {
         health -= _heal;
         health = Mathf.Clamp(health, 0, maxHealth);
     }
-    public void TakeDamage(int _damage)
+    public void TakeDamage(float _damage)
     {
         health -= _damage;
 

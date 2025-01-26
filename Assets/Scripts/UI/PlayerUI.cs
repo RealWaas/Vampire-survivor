@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterUI : MonoBehaviour
+public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private HealthSystem healthSystem;
     [SerializeField] private Image healthBar;
@@ -18,6 +18,6 @@ public class CharacterUI : MonoBehaviour
 
     public void UpdateHealth()
     {
-        healthBar.fillAmount = healthSystem.health / healthSystem.maxHealth;
+        healthBar.fillAmount = (float)healthSystem.health / (float)healthSystem.maxHealth;
     }
 }

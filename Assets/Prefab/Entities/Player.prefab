@@ -92,7 +92,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4799836580092094654}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &4847932391221178419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 1364920683956423656}
   - component: {fileID: 8482535261880809999}
   - component: {fileID: 6373596890847049214}
-  - component: {fileID: 7799627482074482837}
   - component: {fileID: 7079302485148379183}
   m_Layer: 6
   m_Name: Player
@@ -362,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f97985313916a742b58d9bf2a30e949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityRenderer: {fileID: 384979028999862677}
 --- !u!70 &8482535261880809999
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -410,18 +408,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2575d53b09314124bb37cd1ba727cdd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7799627482074482837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5780843601721750942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc91a4454c3130479303d675c3e266a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7079302485148379183

@@ -1,20 +1,27 @@
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
-[RequireComponent(typeof(MovementHandler))]
 [RequireComponent(typeof(HealthSystem))]
 public abstract class Entity : MonoBehaviour
 {
-    protected MovementHandler movementHandler;
-
     protected HealthSystem healthSystem;
 
-    public float moveSpeed { get; protected set; }
-    public int damage { get; protected set; }
+    public float healthModifier /*{ get; protected set; }*/ = 1f;
+    public float speedModifier /*{ get; protected set; }*/ = 1f;
+
+
+    public float damagerModifier /*{ get; protected set; }*/ = 1f;
+    public float cooldownModifier /*{ get; protected set; }*/ = 1f;
+    public float durationModifier /*{ get; protected set; }*/ = 1f;
+    public float projectileSpeedModifier /*{ get; protected set; }*/ = 1f;
+    public float areaSizeModifier /*{ get; protected set; }*/ = 1f;
+
+    public int piercingBonus /*{ get; protected set; }*/ = 0;
+    public int projectileBonus /*{ get; protected set; }*/ = 0;
 
     protected virtual void Start()
     {
         healthSystem = GetComponent<HealthSystem>();
-        movementHandler = GetComponent<MovementHandler>();
 
         healthSystem.OnHealthEmpty += HandleDeath;
     }
@@ -24,4 +31,9 @@ public abstract class Entity : MonoBehaviour
     }
 
     protected abstract void HandleDeath();
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(this.tag)) return;
+    }
 }

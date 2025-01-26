@@ -4,40 +4,35 @@ public abstract class AttackController : MonoBehaviour
 {
     protected Entity attacker;
 
-    protected int damage;
-    protected float speed;
+    protected float damage;
     protected float duration;
     protected float areaSize;
 
-    protected int piercing;
+    //protected int critChance;
 
-    protected float despawnTime;
+    protected float durationTime;
 
     protected virtual void Update()
     {
-        if (Time.time >= despawnTime)
+        // Destroy the projectile after its duration
+        if (Time.time >= durationTime)
         {
             Destroy(gameObject);
         }
-
-        // Move projectile
-        //transform.position += transform.forward * (projectileSpeed * Time.deltaTime);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
-    {
-        // The attack ignore the attacker
-        if (collision.CompareTag(attacker.tag)) return;
-    }
-
+    protected abstract void OnTriggerEnter2D(Collider2D collision);
+    
     public virtual void InitializeAttack(Entity _attacker, AttackBehaviourSO _attack)
     {
-        damage = _attack.damage;
-        speed = _attack.speed;
-        duration = _attack.duration;
-        areaSize = _attack.areaSize;
-        piercing = _attack.piercing;
+        attacker = _attacker;
+     
+        damage = _attack.baseDamage * _attacker.damagerModifier;
+        duration = _attack.baseDuration * _attacker.durationModifier;
+        areaSize = _attack.baseAreaSize * _attacker.areaSizeModifier;
 
-        despawnTime = Time.time + duration;
+        durationTime = Time.time + duration;
+
+        this.transform.localScale = this.transform.localScale * areaSize;
     }
 }

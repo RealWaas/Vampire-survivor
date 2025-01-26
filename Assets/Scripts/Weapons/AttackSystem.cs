@@ -5,15 +5,17 @@ public class AttackSystem : MonoBehaviour
     [SerializeField] AttackBehaviourSO attackBehaviour;
     [SerializeField] Entity attacker;
 
-    protected float cooldownTimer;
+    [SerializeField] protected float cooldownTimer;
     float nextAttackTimer;
 
-    float AttackInterval => 1f / cooldownTimer;
+    //Attack per seconds
+    //float AttackInterval => 1f / cooldownTimer;
 
     [ContextMenu("init")]
     private void InitWeapon()
     {
-        if (attackBehaviour != null) cooldownTimer = attackBehaviour.cooldown;
+        if (attackBehaviour != null)
+            cooldownTimer = attackBehaviour.baseCooldown;
         nextAttackTimer = cooldownTimer;
     }
 
@@ -22,7 +24,10 @@ public class AttackSystem : MonoBehaviour
         if (Time.time >= nextAttackTimer && nextAttackTimer != 0)
         {
             PerformAttack();
-            nextAttackTimer = Time.time + AttackInterval;
+            nextAttackTimer = Time.time + cooldownTimer;
+            
+            //Attack per seconds
+            //nextAttackTimer = Time.time + AttackInterval;
         }
     }
 

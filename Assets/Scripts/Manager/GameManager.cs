@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameManager
 {
     public static GameState currentState { get; private set; } = GameState.InMenu;
+    public static List<Player> playerList { get; private set; } = new List<Player>();
 
     public static event Action OnInMenuState;
     public static event Action OnInGameState;
@@ -31,6 +33,11 @@ public static class GameManager
                 OnGameOverState?.Invoke();
                 break;
         }
+    }
+
+    public static void OnPlayerJoin(Player _newPlayer)
+    {
+        playerList.Add(_newPlayer);
     }
 }
 

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 6821495617002153188, guid: 85c640361022a414e927deae9f8ce82d, type: 3}
   attackOffset: {x: 0, y: 0, z: 0}
-  damage: 0
-  areaSize: 0
-  duration: 1
-  speed: 1
-  piercing: 0
-  cooldown: 2
+  baseDamage: 1
+  baseAreaSize: 1
+  baseDuration: 2
+  baseProjectileSpeed: 1
+  basePiercing: 1
+  baseCooldown: 2

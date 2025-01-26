@@ -1,24 +1,27 @@
 using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
+[RequireComponent(typeof(PlayerMovements))]
 public class Player : Entity
 {
-    public static Player Instance;
-
     [SerializeField] InputManager input;
+    protected PlayerMovements movementHandler;
 
     protected void Awake()
     {
-        Instance = this;
+        movementHandler = GetComponent<PlayerMovements>();
     }
     protected override void Start()
     {
         base.Start();
 
+        GameManager.OnPlayerJoin(this);
+
         //--//
-        healthSystem.ResetHealth(45);
-        moveSpeed = 2;
-        damage = 50;
+        //healthSystem.ResetHealth(45);
+        //moveSpeed = 2;
+        //damagerModifier = 50;
+        //areaSize = 0;
     }
 
     void FixedUpdate()
@@ -26,7 +29,7 @@ public class Player : Entity
         if (GameManager.currentState != GameState.InGame)
             return;
 
-        movementHandler.MoveEntity(input.movementInput.normalized * moveSpeed);
+        movementHandler.MovePlayer(input.movementInput.normalized * speedModifier);
     }
 
     protected override void HandleDeath()
