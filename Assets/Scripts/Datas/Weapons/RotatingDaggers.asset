@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e470f74201352840922ca45370f7148, type: 3}
+  m_Name: RotatingDaggers
+  m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 3132396503068579526, guid: e505fd7a04828474eb508d79fa2b198c, type: 3}
+  weaponSystem: {fileID: 8563488376997753339, guid: c552677570c1b6b459b680d2a22cc6ee, type: 3}
+  attackOffset: {x: 0, y: 1, z: 0}
+  weaponName: Rotating Daggers
+  weaponSprite: {fileID: 1145680292, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  levelStats:
+  - levelDescription: Level 1
+    baseDamage: 1
+    baseAreaSize: 1.5
+    baseDuration: 5
+    baseProjectileSpeed: 1
+    basePiercing: 1
+    baseCooldown: 3
+    baseCount: 5
+  - levelDescription: Level 2
+    baseDamage: 1
+    baseAreaSize: 1
+    baseDuration: 2
+    baseProjectileSpeed: 1
+    basePiercing: 1
+    baseCooldown: 5
+    baseCount: 2

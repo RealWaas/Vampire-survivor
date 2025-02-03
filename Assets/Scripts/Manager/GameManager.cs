@@ -5,10 +5,10 @@ using UnityEngine;
 public static class GameManager
 {
     public static GameState currentState { get; private set; } = GameState.InMenu;
-    public static List<Player> playerList { get; private set; } = new List<Player>();
 
     public static event Action OnInMenuState;
     public static event Action OnInGameState;
+    public static event Action OnItemSelection;
     public static event Action OnGameOverState;
 
 
@@ -26,7 +26,12 @@ public static class GameManager
             case GameState.InMenu:
                 OnInMenuState?.Invoke();
                 break;
+            case GameState.ItemSelection:
+                PauseTime();
+                OnItemSelection?.Invoke();
+                break;
             case GameState.InGame:
+                ResumeTime();
                 OnInGameState?.Invoke();
                 break;
             case GameState.GameOver:
@@ -35,15 +40,14 @@ public static class GameManager
         }
     }
 
-    public static void OnPlayerJoin(Player _newPlayer)
-    {
-        playerList.Add(_newPlayer);
-    }
+    static void PauseTime() => Time.timeScale = 0;
+    static void ResumeTime() => Time.timeScale = 1;
 }
 
 public enum GameState
 {
     InMenu,
+    ItemSelection,
     InGame,
     GameOver
 }

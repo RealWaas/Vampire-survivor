@@ -16,15 +16,18 @@ public static class EntityTracker
 
         if (colliders.Length == 0) return null;
 
-        return colliders
+        Collider2D entity = colliders
             .Where(entity =>
             {
-                return entity.CompareTag(_ownerTag);
+                return !entity.CompareTag(_ownerTag);
             })
             .OrderBy(entity =>
             {
                 return Vector3.Distance(entity.transform.position, _targetPos);
             })
-            .FirstOrDefault().GetComponent<Entity>();
+            .FirstOrDefault();
+
+        if(entity == null) return null;
+        return entity.GetComponent<Entity>();
     }
 }

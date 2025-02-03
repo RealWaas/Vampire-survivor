@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94023ac3ddbf4e44e8587429a452a2bd, type: 3}
+  m_Name: Knight
+  m_EditorClassIdentifier: 
+  healthModifier: 1.2
+  speedModifier: 1
+  damagerModifier: 1
+  cooldownModifier: 1
+  durationModifier: 1.2
+  projectileSpeedModifier: 1
+  areaSizeModifier: 1
+  piercingBonus: 0
+  projectileCountBonus: 0
+  startingWeapon: {fileID: 11400000, guid: ea1bf1f20165a164cb19941ecade25ae, type: 2}
+  characterRender: {fileID: 6203563320956428107, guid: 4116786fae85fb84f83d945fdf675824, type: 3}

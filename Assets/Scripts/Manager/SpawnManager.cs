@@ -1,30 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SpawnManager : MonoBehaviour
 {
-    public static SpawnManager Instance;
+    public static SpawnManager instance;
 
-    [SerializeField] private GameObject spawnPrefab;
     [SerializeField] private float spawnDistance = 0.5f;
+
+    [SerializeField] private List<WaveSO> waveList = new List<WaveSO>();
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        StartCoroutine(spawnVaveCoroutine());
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
+    public void RespawnEnemy(Enemy _enemy)
+    {
+        _enemy.transform.position = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
+    }
+
+    private void SpawnWave(List<EnemyWaveParametter> _waveContent)
+    {
+        foreach(EnemyWaveParametter wave in _waveContent)
         {
-            SpawnObject();
+            for(int spawnAmountIndex = 0; spawnAmountIndex < wave.spawnAmount; spawnAmountIndex++)
+            {
+                SpawnObject(wave.enemy);
+            }
         }
     }
-
-    public void SpawnObject()
+    private void SpawnObject(GameObject _enemy)
     {
         Vector3 relativePos = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
-        GameObject mob = Instantiate(spawnPrefab, relativePos, Quaternion.identity);
+        Instantiate(_enemy, relativePos, Quaternion.identity);
     }
 
     private Vector3 GetRandomSpawnPoint()
@@ -63,6 +82,19 @@ public class SpawnManager : MonoBehaviour
             case 4:
                 Debug.Log("Impossible");
                 return Vector3.zero;
+        }
+    }
+
+    IEnumerator spawnVaveCoroutine()
+    {
+        for(int waveIndex = 0; waveIndex <= waveList.Count - 1; waveIndex++)
+        {
+            for(int spawnIndex = 0;  spawnIndex < waveList[waveIndex].spawnCount; spawnIndex++)
+            {
+                SpawnWave(waveList[waveIndex].waveContent);
+                Debug.Log(spawnIndex);
+                yield return new WaitForSeconds(waveList[waveIndex].spawnInterval);
+            }
         }
     }
 }

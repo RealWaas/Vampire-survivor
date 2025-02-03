@@ -1,31 +1,18 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-/// <summary>
-/// Handle the movements of an object by giving it a behaviour.
-/// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
 public class MovementSystem : MonoBehaviour
 {
-    [SerializeField] MovementBehaviourSO movementBehaviour;
+    Rigidbody2D rb;
 
-    private Transform targetTransform;
-    private float moveSpeed;
+    void Awake() => rb = GetComponent<Rigidbody2D>();
 
     /// <summary>
-    /// Initialize the movement system to follow its behaviour at a given speed.
+    /// Handle the movements of the player with the given direction
     /// </summary>
-    /// <param name="_target"></param>
-    /// <param name="_moveSpeed"></param>
-    public void InitSystem(Transform _target, float _moveSpeed)
+    /// <param name="_direction">movement direction</param>
+    public void MoveEntity(Vector2 _direction)
     {
-        targetTransform = _target;
-        moveSpeed = _moveSpeed;
-    }
-
-    private void Update()
-    {
-        if (!targetTransform && !movementBehaviour) return;
-
-        movementBehaviour.Move(transform, targetTransform, moveSpeed);
+        rb.linearVelocity = _direction;
     }
 }
