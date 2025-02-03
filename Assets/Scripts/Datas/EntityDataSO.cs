@@ -2,10 +2,11 @@ using UnityEngine;
 
 public abstract class EntityDataSO : ScriptableObject
 {
+    public string entityName;
     public float healthModifier;
     public float speedModifier;
 
-    public float damagerModifier;
+    public float damageModifier;
     public float cooldownModifier;
     public float durationModifier;
     public float projectileSpeedModifier;

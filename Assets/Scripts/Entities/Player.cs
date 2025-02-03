@@ -10,7 +10,6 @@ public class Player : Entity
     private ExpSystem expSystem;
 
     private CharacterDataSO characterData;
-    private GameObject characterRenderer;
 
 
     protected void Awake()
@@ -33,7 +32,8 @@ public class Player : Entity
         base.SetStats(_entityData);
 
         characterData = (CharacterDataSO)_entityData;
-        characterRenderer = characterData.characterRender;
+
+        Instantiate(characterData.characterRender, transform);
 
         AttackManager.UpdateWeapon(characterData.startingWeapon);
     }

@@ -4,34 +4,34 @@ using UnityEngine.UI;
 
 public class CharacterButton : MonoBehaviour
 {
-    Button mainButton;
+    [SerializeField] Button mainButton;
     [SerializeField] TMP_Text characterName;
     [SerializeField] Image weaponSprite;
-    [SerializeField] EntityDataSO character;
+    [SerializeField] CharacterDataSO character;
 
-    public void Awake()
+    private void Awake()
     {
-        mainButton = GetComponent<Button>();
         mainButton.onClick.AddListener(OnCLicked);
+        
+        SetCharacter(character);
     }
-
-    public void SetCharacter(CharacterDataSO _character)
-    {
-        character = _character;
-        //characterName.text = character.weaponName;
-        //weaponSprite.sprite = character.weaponSprite;
-    }
-
-    public void OnDestroy()
+    private void OnDestroy()
     {
         mainButton.onClick.RemoveListener(OnCLicked);
     }
+
+    private void SetCharacter(CharacterDataSO _character)
+    {
+        character = _character;
+        characterName.text = character.entityName;
+        weaponSprite.sprite = character.startingWeapon.weaponSprite;
+    }
+
 
     private void OnCLicked()
     {
         if (character == null) return;
 
-        Player.instance.SetStats(character);
-        GameManager.SetGameState(GameState.InGame);
+        CharacterStats.instance.SetCharacterStats(character);
     }
 }

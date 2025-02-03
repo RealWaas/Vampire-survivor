@@ -38,7 +38,7 @@ public abstract class Entity : MonoBehaviour
         healthModifier = _entityData.healthModifier;
         speedModifier = _entityData.speedModifier;
 
-        damageModifier = _entityData.damagerModifier;
+        damageModifier = _entityData.damageModifier;
         cooldownModifier = _entityData.cooldownModifier;
         durationModifier = _entityData.durationModifier;
         projectileSpeedModifier = _entityData.projectileSpeedModifier;

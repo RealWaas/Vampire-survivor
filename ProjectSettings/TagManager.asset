@@ -48,6 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: ForeGround
+    uniqueID: 2268641309
+    locked: 0
   - name: Canvas
     uniqueID: 149558593
     locked: 0

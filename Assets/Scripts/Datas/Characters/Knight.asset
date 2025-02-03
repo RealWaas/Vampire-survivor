@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94023ac3ddbf4e44e8587429a452a2bd, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
+  entityName: Knight
   healthModifier: 1.2
   speedModifier: 1
-  damagerModifier: 1
+  damageModifier: 1
   cooldownModifier: 1
   durationModifier: 1.2
   projectileSpeedModifier: 1

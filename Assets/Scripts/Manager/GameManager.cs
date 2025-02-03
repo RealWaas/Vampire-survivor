@@ -4,11 +4,12 @@ using UnityEngine;
 
 public static class GameManager
 {
-    public static GameState currentState { get; private set; } = GameState.InMenu;
+    public static GameState currentState { get; private set; } = GameState.CharacterSelection;
 
     public static event Action OnInMenuState;
-    public static event Action OnInGameState;
+    public static event Action OnCharacterSelection;
     public static event Action OnItemSelection;
+    public static event Action OnInGameState;
     public static event Action OnGameOverState;
 
 
@@ -25,6 +26,9 @@ public static class GameManager
         {
             case GameState.InMenu:
                 OnInMenuState?.Invoke();
+                break;
+            case GameState.CharacterSelection:
+                OnCharacterSelection?.Invoke();
                 break;
             case GameState.ItemSelection:
                 PauseTime();
@@ -47,6 +51,7 @@ public static class GameManager
 public enum GameState
 {
     InMenu,
+    CharacterSelection,
     ItemSelection,
     InGame,
     GameOver

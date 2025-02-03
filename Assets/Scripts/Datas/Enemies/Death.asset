@@ -9,10 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb6314055eb0524c8eeda65c4000b8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a4673da4f2a65d47bf477187f361c61, type: 3}
   m_Name: Death
   m_EditorClassIdentifier: 
-  maxHealth: 9999
-  moveSpeed: 3
-  damage: 999
-  expAmount: 0
+  entityName: Death
+  healthModifier: 100
+  speedModifier: 10
+  damageModifier: 100
+  cooldownModifier: 1
+  durationModifier: 1
+  projectileSpeedModifier: 1
+  areaSizeModifier: 1
+  piercingBonus: 0
+  projectileCountBonus: 0
+  startingWeapon: {fileID: 0}
+  expAmount: 100

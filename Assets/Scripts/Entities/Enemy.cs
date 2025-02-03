@@ -9,10 +9,8 @@ public class Enemy : Entity
 
     [SerializeField] WeaponSystem weaponSystem;
 
-    public override void Start()
+    protected override void Start()
     {
-        base.Start();
-
         movementSystem = GetComponent<MovementSystem>();
         ResetValues(enemyData);
     }
@@ -41,7 +39,7 @@ public class Enemy : Entity
 
         movementSystem.MoveEntity(movementDir.normalized * speedModifier);
     }
-    protected override void SetStats(EntityDataSO _entityData)
+    public override void SetStats(EntityDataSO _entityData)
     {
         base.SetStats(_entityData);
 
@@ -54,7 +52,7 @@ public class Enemy : Entity
     {
         healthSystem.ResetHealth(10 * _enemy.healthModifier);
         speedModifier = _enemy.speedModifier;
-        damageModifier = _enemy.damagerModifier;
+        damageModifier = _enemy.damageModifier;
     }
 
     protected override void HandleDeath()
