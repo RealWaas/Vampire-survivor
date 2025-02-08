@@ -8,7 +8,7 @@ public class WeaponPlaceholder : MonoBehaviour
     [SerializeField] TMP_Text weaponName;
     [SerializeField] TMP_Text weaponDescription;
     [SerializeField] Image weaponSprite;
-    [SerializeField] WeaponDataSO weapon;
+    [SerializeField] WeaponBaseDataSO weapon;
 
     public void Awake()
     {
@@ -16,7 +16,8 @@ public class WeaponPlaceholder : MonoBehaviour
         mainButton.onClick.AddListener(OnCLicked);
     }
 
-    public void SetWeapon(WeaponDataSO _weapon, int _currentLevel)
+
+    public void SetWeapon(WeaponBaseDataSO _weapon, int _currentLevel)
     {
         weapon = _weapon;
         weaponName.text = weapon.weaponName;
@@ -33,7 +34,7 @@ public class WeaponPlaceholder : MonoBehaviour
     {
         if (weapon == null) return;
 
-        AttackManager.UpdateWeapon(weapon);
+        WeaponManager.UpdateWeapon(weapon);
         GameManager.SetGameState(GameState.InGame);
     }
 }

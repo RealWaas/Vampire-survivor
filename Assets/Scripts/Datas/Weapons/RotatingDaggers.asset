@@ -19,18 +19,20 @@ MonoBehaviour:
   weaponSprite: {fileID: 1145680292, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
   levelStats:
   - levelDescription: Level 1
-    baseDamage: 1
-    baseAreaSize: 1.5
-    baseDuration: 5
-    baseProjectileSpeed: 1
-    basePiercing: 1
-    baseCooldown: 3
-    baseCount: 5
+    damage: 1
+    cooldown: 3
+    speed: 2
+    duration: 5
+    size: 1
+    knockBack: 0
+    piercing: 0
+    count: 5
   - levelDescription: Level 2
-    baseDamage: 1
-    baseAreaSize: 1
-    baseDuration: 2
-    baseProjectileSpeed: 1
-    basePiercing: 1
-    baseCooldown: 5
-    baseCount: 2
+    damage: 0
+    cooldown: 0
+    speed: 0
+    duration: 0
+    size: 0
+    knockBack: 0
+    piercing: 0
+    count: 0

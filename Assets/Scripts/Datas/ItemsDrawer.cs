@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemsDrawer : MonoBehaviour
 {
-    [SerializeField] private List<WeaponDataSO> weaponsList = new List<WeaponDataSO>();
+    [SerializeField] private List<WeaponBaseDataSO> weaponsList = new List<WeaponBaseDataSO>();
 
     [SerializeField] private WeaponPlaceholder placeholderPrefab;
     [SerializeField] private Transform ChoiceDisplayer;
@@ -21,17 +21,17 @@ public class ItemsDrawer : MonoBehaviour
         GameManager.OnItemSelection -= SetWeaponChoices;
     }
 
-    private List<WeaponDataSO> GetAvailableWeapons()
+    private List<WeaponBaseDataSO> GetAvailableWeapons()
     {
-        List<WeaponDataSO> availableWeapons = weaponsList
+        List<WeaponBaseDataSO> availableWeapons = weaponsList
             .Where(element =>
             {
                 // The player dont have the weapon and have enough space
-                if (!AttackManager.weaponList.ContainsKey(element) && AttackManager.weaponList.Count < AttackManager.MAX_WEAPON_COUNT)
+                if (!WeaponManager.weaponList.ContainsKey(element) && WeaponManager.weaponList.Count < WeaponManager.MAX_WEAPON_COUNT)
                     return true;
 
                 // Return true if the player can upgrade the weapon
-                return AttackManager.weaponList[element].level < element.levelStats.Count - 1;
+                return WeaponManager.weaponList[element].level < element.levelStats.Count - 1;
             }).ToList();
 
         return availableWeapons;
@@ -39,7 +39,7 @@ public class ItemsDrawer : MonoBehaviour
 
     private void SetWeaponChoices()
     {
-        List<WeaponDataSO> availableWeapons = GetAvailableWeapons();
+        List<WeaponBaseDataSO> availableWeapons = GetAvailableWeapons();
         availableWeapons = ShuffleList(availableWeapons);
 
         ReplaceWeaponChoices(availableWeapons);
@@ -49,7 +49,7 @@ public class ItemsDrawer : MonoBehaviour
     /// Replace the choices in the displayer with new random ones.
     /// </summary>
     /// <param name="_availableChoices"></param>
-    private void ReplaceWeaponChoices(List<WeaponDataSO> _availableChoices)
+    private void ReplaceWeaponChoices(List<WeaponBaseDataSO> _availableChoices)
     {
         // Remove old choices
         foreach (Transform child in ChoiceDisplayer)
@@ -65,8 +65,8 @@ public class ItemsDrawer : MonoBehaviour
 
             // Get the level zero of the wepon, if the player already have the weapon, get the next available level
             int weaponLevel = 0;
-            if (AttackManager.weaponList.ContainsKey(_availableChoices[weaponIndex]))
-                weaponLevel = AttackManager.weaponList[_availableChoices[weaponIndex]].level + 1;
+            if (WeaponManager.weaponList.ContainsKey(_availableChoices[weaponIndex]))
+                weaponLevel = WeaponManager.weaponList[_availableChoices[weaponIndex]].level + 1;
 
             placeHolder.SetWeapon(_availableChoices[weaponIndex], weaponLevel);
         }

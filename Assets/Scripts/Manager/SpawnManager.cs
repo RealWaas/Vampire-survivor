@@ -13,19 +13,23 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        GameManager.OnGameStarted += StartGame;
     }
 
-    private void Start()
+    private void StartGame()
     {
         StartCoroutine(spawnVaveCoroutine());
+        GameManager.SetGameState(GameState.InGame);
     }
 
     private void OnDestroy()
     {
+        GameManager.OnGameStarted -= StartGame;
         StopAllCoroutines();
     }
 
-    public void RespawnEnemy(Enemy _enemy)
+    public void RespawnEnemy(BaseEnemy _enemy)
     {
         _enemy.transform.position = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
     }
@@ -36,14 +40,35 @@ public class SpawnManager : MonoBehaviour
         {
             for(int spawnAmountIndex = 0; spawnAmountIndex < wave.spawnAmount; spawnAmountIndex++)
             {
-                SpawnObject(wave.enemy);
+                GameObject enemy = PoolManager.GetAvailableObjectFromPool(wave.enemy);
+
+                if(!enemy)
+                    SpawnObject(wave.enemy);
+                else
+                    ReSpawnObject(enemy);
             }
         }
     }
     private void SpawnObject(GameObject _enemy)
     {
         Vector3 relativePos = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
-        Instantiate(_enemy, relativePos, Quaternion.identity);
+        BaseEnemy enemy = Instantiate(_enemy, relativePos, Quaternion.identity).GetComponent<BaseEnemy>();
+        
+        // Add the gameObject to the pool
+        PoolManager.CreateObject(_enemy, enemy.gameObject);
+        
+        enemy.ResetEntity(enemy.enemyData);
+    }
+
+    private void ReSpawnObject(GameObject _enemy)
+    {
+        Vector3 relativePos = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
+        _enemy.SetActive(true);
+        _enemy.transform.position = relativePos;
+        
+        BaseEnemy enemy = _enemy.GetComponent<BaseEnemy>();
+
+        enemy.ResetEntity(enemy.enemyData);
     }
 
     private Vector3 GetRandomSpawnPoint()
@@ -92,7 +117,6 @@ public class SpawnManager : MonoBehaviour
             for(int spawnIndex = 0;  spawnIndex < waveList[waveIndex].spawnCount; spawnIndex++)
             {
                 SpawnWave(waveList[waveIndex].waveContent);
-                Debug.Log(spawnIndex);
                 yield return new WaitForSeconds(waveList[waveIndex].spawnInterval);
             }
         }

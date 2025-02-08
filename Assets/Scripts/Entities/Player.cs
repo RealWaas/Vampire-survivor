@@ -1,41 +1,44 @@
 using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
-[RequireComponent(typeof(MovementSystem))]
 public class Player : Entity
 {
     public static Player instance;
     [SerializeField] InputManager input;
-    protected MovementSystem movementHandler;
+
+    private GameObject playerRenderer;
+
     private ExpSystem expSystem;
 
     private CharacterDataSO characterData;
 
-
-    protected void Awake()
+    protected override void Awake()
     {
         instance = this;
-        movementHandler = GetComponent<MovementSystem>();
+
+        base.Awake();
         expSystem = GetComponent<ExpSystem>();
-    }
-    protected override void Start()
-    {
-        base.Start();
     }
 
     /// <summary>
-    /// Set the stats, starting weapon and renderer.
+    /// Reset the stats, starting weapon and renderer of the player.
     /// </summary>
     /// <param name="_entityData"></param>
-    public override void SetStats(EntityDataSO _entityData)
+    public override void ResetEntity(EntityDataSO _entityData)
     {
-        base.SetStats(_entityData);
-
         characterData = (CharacterDataSO)_entityData;
 
-        Instantiate(characterData.characterRender, transform);
+        // Replace the previous renderer so the player can change character
+        Destroy(playerRenderer);
+        playerRenderer = Instantiate(characterData.characterRender, transform);
 
-        AttackManager.UpdateWeapon(characterData.startingWeapon);
+        // Reset player stats
+        stats = _entityData.baseStats;
+        healthSystem.ResetHealth(BASE_HEALTH * stats.healthModifier);
+        expSystem.ResetExp();
+
+        // Add the starting weapon
+        WeaponManager.UpdateWeapon(characterData.startingWeapon);
     }
 
     void FixedUpdate()
@@ -43,16 +46,17 @@ public class Player : Entity
         if (GameManager.currentState != GameState.InGame)
             return;
 
-        movementHandler.MoveEntity(input.movementInput * speedModifier);
-
-        //Vector3 inputDir = new Vector3(input.movementInput.x, input.movementInput.y, 0);
-        //transform.position += inputDir.normalized * speedModifier * Time.deltaTime;
+        movementHandler.MoveEntity(input.movementInput.normalized * BASE_SPEED * stats.speedModifier);
     }
 
     public void CollectExp(float _amount) => expSystem.GainExp(_amount);
+    public void GainHeal(float _amount) => healthSystem.TakeHeal(_amount);
+
+    protected override void TakeDamage(float _knockBack) { }
 
     protected override void HandleDeath()
     {
         GameManager.SetGameState(GameState.GameOver);
     }
+
 }

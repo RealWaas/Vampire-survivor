@@ -1,20 +1,42 @@
+using System.Collections;
 using UnityEngine;
 
 public class RangedSystem : WeaponSystem
 {
-    protected override void PerformAttack(Entity _bearer)
+    protected override void PerformAttack()
     {
-        Entity targetEntity = EntityTracker.GetClosestEntity(transform.position, 10, _bearer.tag);
+        StartCoroutine(FireProjectiles());
+    }
 
-        GameObject attack = Instantiate(weaponData.attackPrefab, transform.position, Quaternion.identity);
+    private IEnumerator FireProjectiles()
+    {
+        for(int index = 0; index < weaponStats.count; index++)
+        {
+            Entity targetEntity = EntityTracker.GetClosestEntity(transform.position, 10, bearer.tag);
 
-        if (targetEntity)
-            attack.transform.right = attack.transform.position - targetEntity.transform.position;
+            GameObject attack = PoolManager.GetAvailableObjectFromPool(weaponData.attackPrefab);
 
-        //attack.transform.localPosition = attackOffset;
+            if (!attack)
+            {
+                attack = Instantiate(weaponData.attackPrefab, transform.position, Quaternion.identity);
+                PoolManager.CreateObject(weaponData.attackPrefab, attack);
+            }
+            else
+            {
+                attack.SetActive(true);
+                attack.transform.position = transform.position;
+            }
 
-        // Geting its controller component
-        if (attack.TryGetComponent(out AttackController attackController))
-            attackController.InitializeAttack(this);
+            if (targetEntity)
+                attack.transform.right = attack.transform.position - targetEntity.transform.position;
+
+            //attack.transform.localPosition = attackOffset;
+
+            // Geting its controller component
+            if (attack.TryGetComponent(out AttackController attackController))
+                attackController.InitializeAttack(this);
+
+            yield return new WaitForSeconds(weaponStats.interval);
+        }
     }
 }

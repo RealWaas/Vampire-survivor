@@ -4,6 +4,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject ItemSelection;
     [SerializeField] private GameObject CharacterSelection;
+    [SerializeField] private GameObject MainMenu;
 
     private void Awake()
     {
@@ -17,40 +18,45 @@ public class UIManager : MonoBehaviour
     {
         GameManager.OnInMenuState -= OpenMenu;
         GameManager.OnCharacterSelection -= OpenCharacterSelection;
-        GameManager.OnItemSelection -= OpenItemSelection;
         GameManager.OnInGameState -= InGameState;
     }
 
     private void Start()
     {
-        CharacterSelection.SetActive(true);
+        OpenMenu();
+    }
 
+
+    /// <summary>
+    /// Hide all menues
+    /// </summary>
+    private void HideAll()
+    {
+        MainMenu.SetActive(false);
+        CharacterSelection.SetActive(false);
         ItemSelection.SetActive(false);
     }
 
     private void OpenMenu()
     {
-        ItemSelection.SetActive(false);
+        HideAll();
+        MainMenu.SetActive(true);
     }
 
     private void OpenCharacterSelection()
     {
+        HideAll();
         CharacterSelection.SetActive(true);
-
-        ItemSelection.SetActive(false);
     }
 
     private void OpenItemSelection()
     {
+        HideAll();
         ItemSelection.SetActive(true);
-
-        CharacterSelection.SetActive(false);
     }
 
     private void InGameState()
     {
-        CharacterSelection.SetActive(false);
-        ItemSelection.SetActive(false);
+        HideAll();
     }
-
 }

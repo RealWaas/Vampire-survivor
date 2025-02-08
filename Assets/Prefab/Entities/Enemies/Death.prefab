@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5859213565699192166}
-  - component: {fileID: 3472933702750516615}
   - component: {fileID: 5945803961105530654}
   - component: {fileID: 5407299919086623742}
   - component: {fileID: 3930112676779215428}
   - component: {fileID: 3410574893241994917}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Death
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -37,23 +36,6 @@ Transform:
   - {fileID: 5866752787623175067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3472933702750516615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4653512324275060088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2f1eae21bbd7d34fb7e5118fa2cf502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 1c2b088635f78914796e779f41bd457b, type: 2}
-  movementSystem: {fileID: 0}
-  crystalPrefab: {fileID: 6877852026050813237, guid: 09964feb4581c5740bec19db8039a898, type: 3}
-  weaponSystem: {fileID: 0}
-  weaponDataSO: {fileID: 0}
 --- !u!114 &5945803961105530654
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5859213565699192166}
-  - component: {fileID: 3472933702750516615}
   - component: {fileID: 5945803961105530654}
   - component: {fileID: 5407299919086623742}
   - component: {fileID: 2223471585475222848}
   - component: {fileID: 3410574893241994917}
+  - component: {fileID: 3102574632745569542}
   m_Layer: 6
   m_Name: Bat
   m_TagString: Enemy
@@ -37,23 +37,6 @@ Transform:
   - {fileID: 5866752787623175067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3472933702750516615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4653512324275060088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2f1eae21bbd7d34fb7e5118fa2cf502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 055767424acb89b4ea2923b8cc7f8211, type: 2}
-  movementSystem: {fileID: 0}
-  crystalPrefab: {fileID: 6877852026050813237, guid: 09964feb4581c5740bec19db8039a898, type: 3}
-  weaponSystem: {fileID: 0}
-  weaponDataSO: {fileID: 0}
 --- !u!114 &5945803961105530654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +92,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 136
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -123,11 +106,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.55}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -151,6 +134,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f97985313916a742b58d9bf2a30e949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3102574632745569542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653512324275060088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7131326bb20c458b86df32f4b9ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSystem: {fileID: 5945803961105530654}
+  weaponHolder: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: 055767424acb89b4ea2923b8cc7f8211, type: 2}
+  crystalPrefab: {fileID: 7795327743120151085, guid: 09964feb4581c5740bec19db8039a898, type: 3}
+  weaponSystem: {fileID: 0}
 --- !u!1 &6483841396183748058
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 6483841396183748058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.562, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RotatingController : AttackController
 {
-    protected float speed;
     [SerializeField] protected float rotatespeed = 100;
 
     [SerializeField] protected GameObject projectilePrefab;
@@ -17,41 +16,60 @@ public class RotatingController : AttackController
     public override void InitializeAttack(WeaponSystem _system)
     {
         base.InitializeAttack(_system);
-        speed = _system.weaponData.levelStats[_system.level].baseProjectileSpeed * _system.bearer.projectileSpeedModifier;
 
-        int projectileCount = _system.weaponData.levelStats[_system.level].baseCount + _system.bearer.countBonus;
+        //ParentConstraint constraint = gameObject.GetComponent<ParentConstraint>();
+        //constraint.AddSource(_system.bearer.transform);
 
-        StartCoroutine(spawnProjectiles(projectileCount, _system.weaponData.attackOffset, _system));
+        foreach (Transform child in  transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        StartCoroutine(spawnProjectiles(weaponStats.count, _system.weaponData.attackOffset, _system));
     }
 
     protected override void Update()
     {
         base.Update();
-        transform.Rotate(Vector3.forward * rotatespeed * speed * Time.deltaTime);
+        transform.Rotate(Vector3.forward * rotatespeed * weaponStats.speed * Time.deltaTime);
     }
 
     IEnumerator spawnProjectiles(int _projectileCount, Vector3 _offset, WeaponSystem _system)
     {
-        float timeBetweenSpawns = 360f / ((rotatespeed * speed) * _projectileCount);
+        float timeBetweenSpawns = 360f / ((rotatespeed * weaponStats.speed) * _projectileCount);
 
         for (int countIndex = 0; countIndex < _projectileCount; countIndex++)
         {
-            Vector3 spawnPosition = this.transform.position + _offset * areaSize;
+            Vector3 spawnPosition = this.transform.position + _offset * weaponStats.size;
 
-            // Instantiate the projectile at the calculated position
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, projectilePrefab.transform.rotation);
+            GameObject attack = PoolManager.GetAvailableObjectFromPool(projectilePrefab);
+
+            if (!attack)
+            {
+                attack = Instantiate(projectilePrefab, spawnPosition, projectilePrefab.transform.rotation);
+                PoolManager.CreateObject(projectilePrefab, attack);
+            }
+            else
+            {
+                attack.SetActive(true);
+                attack.transform.position = spawnPosition;
+                attack.transform.localScale = projectilePrefab.transform.localScale;
+                attack.transform.rotation = projectilePrefab.transform.rotation;
+            }
+
+
 
             // Optionally, parent the projectile to the rotating object
-            projectile.transform.SetParent(this.transform, worldPositionStays: true);
+            attack.transform.SetParent(this.transform, worldPositionStays: true);
 
-            if (projectile.TryGetComponent(out AttackController attackController))
+            if (attack.TryGetComponent(out AttackController attackController))
                 attackController.InitializeAttack(_system);
 
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         StopAllCoroutines();
     }

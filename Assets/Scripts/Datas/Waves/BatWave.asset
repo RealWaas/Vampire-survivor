@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveContent:
   - enemy: {fileID: 4653512324275060088, guid: 00568d21c1f74bd4c897eef92bd99aba, type: 3}
-    spawnAmount: 3
-  - enemy: {fileID: 4653512324275060088, guid: 63a89890a8bf0a04f8f1f89522c15e38, type: 3}
-    spawnAmount: 1
-  spawnInterval: 5
-  spawnCount: 2
+    spawnAmount: 4
+  spawnInterval: 10
+  spawnCount: 5

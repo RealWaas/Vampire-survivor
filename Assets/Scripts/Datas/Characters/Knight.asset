@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   entityName: Knight
-  healthModifier: 1.2
-  speedModifier: 1
-  damageModifier: 1
-  cooldownModifier: 1
-  durationModifier: 1.2
-  projectileSpeedModifier: 1
-  areaSizeModifier: 1
-  piercingBonus: 0
-  projectileCountBonus: 0
+  baseStats:
+    healthModifier: 1
+    speedModifier: 1
+    damageModifier: 1
+    cooldownModifier: 1
+    projectilSpeedModifier: 1
+    durationModifier: 1
+    sizeModifier: 1
+    knockbackMultiplier: 0
+    piercingBonus: 0
+    countBonus: 0
   startingWeapon: {fileID: 11400000, guid: ea1bf1f20165a164cb19941ecade25ae, type: 2}
   characterRender: {fileID: 6203563320956428107, guid: 4116786fae85fb84f83d945fdf675824, type: 3}

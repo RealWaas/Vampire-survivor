@@ -2,9 +2,20 @@ using UnityEngine;
 
 public class RotationSystem : WeaponSystem
 {
-    protected override void PerformAttack(Entity _bearer)
+    protected override void PerformAttack()
     {
-        GameObject attack = Instantiate(weaponData.attackPrefab, transform);
+        GameObject attack = PoolManager.GetAvailableObjectFromPool(weaponData.attackPrefab);
+
+        if (!attack)
+        {
+            attack = Instantiate(weaponData.attackPrefab, transform);
+            PoolManager.CreateObject(weaponData.attackPrefab, attack);
+        }
+        else
+        {
+            attack.SetActive(true);
+
+        }
 
         // Geting its controller component
         if (attack.TryGetComponent(out AttackController attackController))
@@ -14,8 +25,8 @@ public class RotationSystem : WeaponSystem
     {
         if (Time.time >= nextAttackTimer && nextAttackTimer != 0)
         {
-            PerformAttack(bearer);
-            nextAttackTimer = Time.time + cooldownTimer + weaponData.levelStats[level].baseDuration * bearer.durationModifier;
+            PerformAttack();
+            nextAttackTimer = Time.time + cooldownTimer + weaponStats.duration;
 
             //Attack per seconds
             //nextAttackTimer = Time.time + AttackInterval;
