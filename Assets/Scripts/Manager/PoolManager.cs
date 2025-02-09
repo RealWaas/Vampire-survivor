@@ -48,4 +48,18 @@ public static class PoolManager
     /// <param name="_key"></param>
     /// <param name="_value"></param>
     public static void CreateObject(GameObject _key, GameObject _value) => objectPools[_key].Add(_value);
+
+    /// <summary>
+    /// Reset all elements in pools to restart the game.
+    /// </summary>
+    public static void ResetPools()
+    {
+        // For each pool
+        foreach (List<GameObject> instances in objectPools.Values)
+        {
+            // For each element
+            foreach (GameObject instance in instances)
+                instance.SetActive(false);
+        }
+    }
 }

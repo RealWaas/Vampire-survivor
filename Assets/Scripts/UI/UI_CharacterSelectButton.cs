@@ -28,7 +28,7 @@ public class UI_CharacterSelectButton : MonoBehaviour
     {
         character = _character;
         characterName.text = character.entityName;
-        weaponSprite.sprite = character.startingWeapon.weaponSprite;
+        weaponSprite.sprite = character.startingWeapon.itemSprite;
     }
 
     /// <summary>

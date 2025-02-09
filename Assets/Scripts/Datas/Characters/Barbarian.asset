@@ -15,7 +15,7 @@ MonoBehaviour:
   entityName: Barbarian
   baseStats:
     healthModifier: 1
-    speedModifier: 1
+    speedModifier: 1.4
     damageModifier: 1.2
     cooldownModifier: 1
     projectilSpeedModifier: 1
@@ -24,5 +24,5 @@ MonoBehaviour:
     knockbackMultiplier: 0
     piercingBonus: 0
     countBonus: 0
-  startingWeapon: {fileID: 11400000, guid: 5fdd996ccd9f94c48aba36d80a2171eb, type: 2}
+  startingWeapon: {fileID: 11400000, guid: de46b883692b9d143b70f569517083b5, type: 2}
   characterRender: {fileID: 2403031746864678059, guid: 5f87cb9f460a17d4ca3b0ae285bbbddc, type: 3}

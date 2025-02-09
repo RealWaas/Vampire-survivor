@@ -6,6 +6,9 @@ public class Enemy_Skull : BaseEnemy
     {
         base.Move(_playerDir);
 
+        // Inversed, the skull sprite is looking toward the left
+        enemyRenderer.flipX = _playerDir.x > 0;
+
         movementHandler.MoveEntity(_playerDir.normalized * BASE_SPEED * stats.speedModifier);
     }
 

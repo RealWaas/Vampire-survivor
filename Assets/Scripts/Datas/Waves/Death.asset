@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Death
   m_EditorClassIdentifier: 
   waveContent:
-  - enemy: {fileID: 4653512324275060088, guid: 6977cf2f11572db458efda4525ad26b1, type: 3}
-    spawnAmount: 1
-  spawnInterval: 10
-  spawnCount: 1
+  - prefab: {fileID: 4653512324275060088, guid: b25b01966d4ff284295ea62a9c3beb00, type: 3}
+    weight: 1
+  spawnAmount: 1
+  waveDuration: 60
+  spawnInterval: 60

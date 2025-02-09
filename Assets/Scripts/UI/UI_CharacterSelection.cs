@@ -33,7 +33,7 @@ public class UI_CharacterSelection : MonoBehaviour
 
         //Infos
         charaDescription += $"Name : {character.entityName}<br>";
-        charaDescription += $"Weapon : {character.startingWeapon.weaponName}<br>";
+        charaDescription += $"Weapon : {character.startingWeapon.itemName}<br>";
 
         //Stats
         charaDescription += $"Health : {character.baseStats.healthModifier * 100} %<br>";

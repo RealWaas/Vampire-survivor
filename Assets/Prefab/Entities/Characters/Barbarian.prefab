@@ -806,6 +806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3101559148045118267}
   - component: {fileID: 6823813720680180457}
+  - component: {fileID: 5562243235685185391}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -842,6 +843,28 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 1
+--- !u!95 &5562243235685185391
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527230716693234943}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ecd042caf0a22b4ea4e9fc044ae73cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1606627631086047761
 GameObject:
   m_ObjectHideFlags: 0

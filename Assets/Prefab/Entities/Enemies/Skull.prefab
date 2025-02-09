@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5945803961105530654}
   - component: {fileID: 5407299919086623742}
   - component: {fileID: 3410574893241994917}
-  - component: {fileID: 1738147092419999581}
+  - component: {fileID: 2267448556734637900}
   m_Layer: 6
   m_Name: Skull
   m_TagString: Enemy
@@ -50,9 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSystem: {fileID: 5945803961105530654}
+  weaponHolder: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 41d23a9f33a83564988a80ddf485bbab, type: 2}
-  movementSystem: {fileID: 0}
   crystalPrefab: {fileID: 7795327743120151085, guid: 09964feb4581c5740bec19db8039a898, type: 3}
+  enemyRenderer: {fileID: 3742428088400982718}
   weaponSystem: {fileID: 0}
 --- !u!114 &5945803961105530654
 MonoBehaviour:
@@ -105,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f97985313916a742b58d9bf2a30e949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &1738147092419999581
-CircleCollider2D:
+--- !u!61 &2267448556734637900
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,8 +140,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.38
+  m_Offset: {x: 0, y: -0.03}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5, y: 0.25}
+  m_EdgeRadius: 0
 --- !u!1 &6483841396183748058
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +178,8 @@ Transform:
   m_GameObject: {fileID: 6483841396183748058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.073, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5859213565699192166}

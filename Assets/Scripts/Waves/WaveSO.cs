@@ -6,13 +6,18 @@ using UnityEngine;
 public class WaveSO : ScriptableObject
 {
     public List<EnemyWaveParametter> waveContent = new List<EnemyWaveParametter>();
-    public int spawnInterval = 10;
-    public int spawnCount = 10;
+
+    // The amount of enemies spawn each wave
+    public int spawnAmount = 10;
+
+    public float waveDuration = 60;
+    public float spawnInterval = 10;
 }
 
 [Serializable]
 public class EnemyWaveParametter
 {
-    public GameObject enemy;
-    public int spawnAmount = 3;
+    public GameObject prefab;
+
+    public float weight = 1;
 }

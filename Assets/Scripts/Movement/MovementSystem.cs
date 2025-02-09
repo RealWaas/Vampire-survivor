@@ -15,4 +15,9 @@ public class MovementSystem : MonoBehaviour
     {
         rb.linearVelocity = _direction;
     }
+
+    public void ResetMovement()
+    {
+        rb.linearVelocity = Vector3.zero;
+    }
 }

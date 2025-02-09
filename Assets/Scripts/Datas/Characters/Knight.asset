@@ -15,7 +15,7 @@ MonoBehaviour:
   entityName: Knight
   baseStats:
     healthModifier: 1
-    speedModifier: 1
+    speedModifier: 1.4
     damageModifier: 1
     cooldownModifier: 1
     projectilSpeedModifier: 1

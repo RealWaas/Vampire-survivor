@@ -6,5 +6,5 @@ public abstract class EntityDataSO : ScriptableObject
 
     public EntityStats baseStats;
 
-    public WeaponBaseDataSO startingWeapon;
+    public ActiveItemSO startingWeapon;
 }

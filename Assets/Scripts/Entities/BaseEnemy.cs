@@ -5,6 +5,7 @@ public abstract class BaseEnemy : Entity
 {
     [SerializeField] public EnemyDataSO enemyData;
     [SerializeField] protected GameObject crystalPrefab;
+    [SerializeField] protected SpriteRenderer enemyRenderer;
 
     [SerializeField] protected WeaponSystem weaponSystem;
 
@@ -32,7 +33,7 @@ public abstract class BaseEnemy : Entity
     {
         if (_playerDir.magnitude > 13)
         {
-            SpawnManager.instance.RespawnEnemy(this);
+            SpawnManager.instance.RespawnEnemy(this.transform);
             ResetMovement();
             return;
         }
@@ -54,7 +55,8 @@ public abstract class BaseEnemy : Entity
     {
         Vector2 playerDir = Player.instance.transform.position - transform.position;
 
-        transform.DOPunchPosition(-playerDir * _knockBack, 0.1f);
+        if (_knockBack <= 0) return;
+        transform.DOPunchPosition(-playerDir, _knockBack);
     }
 
     protected override void HandleDeath()

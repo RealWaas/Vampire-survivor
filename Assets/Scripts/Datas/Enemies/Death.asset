@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Death
   m_EditorClassIdentifier: 
   entityName: Death
-  healthModifier: 100
-  speedModifier: 10
-  damageModifier: 100
-  cooldownModifier: 1
-  durationModifier: 1
-  projectileSpeedModifier: 1
-  areaSizeModifier: 1
-  piercingBonus: 0
-  projectileCountBonus: 0
+  baseStats:
+    healthModifier: 5
+    speedModifier: 1.5
+    damageModifier: 500
+    cooldownModifier: 5
+    projectilSpeedModifier: 2.5
+    durationModifier: 3
+    sizeModifier: 1
+    knockbackMultiplier: 0
+    piercingBonus: 0
+    countBonus: 0
   startingWeapon: {fileID: 0}
   expAmount: 100

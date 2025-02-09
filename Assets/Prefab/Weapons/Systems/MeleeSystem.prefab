@@ -44,3 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e997204972a4bb4fbd4ca1602189767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 0}
+  weaponStats:
+    levelDescription: 
+    damage: 0
+    cooldown: 0
+    speed: 0
+    duration: 0
+    size: 0
+    knockBack: 0
+    interval: 0
+    piercing: 0
+    count: 0

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7293103cf4ce4241af45ff55f4641f9, type: 3}
+  m_Name: RotatingDaggers
+  m_EditorClassIdentifier: 
+  itemName: Rotating dagger
+  itemSprite: {fileID: 503644337, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  attackPrefab: {fileID: 3399815073018679307, guid: abf12276e1733db4e94b2b6c6362cee3, type: 3}
+  weaponSystem: {fileID: 8563488376997753339, guid: c552677570c1b6b459b680d2a22cc6ee, type: 3}
+  attackOffset: {x: 0, y: 0, z: 0}
+  levelStats:
+  - levelDescription: Make magic daggers appears around the player
+    damage: 1
+    cooldown: 5
+    speed: 100
+    duration: 3
+    size: 3
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 2

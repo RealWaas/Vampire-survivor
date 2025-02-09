@@ -22,6 +22,7 @@ public class ExpSystem : MonoBehaviour
     /// <summary>
     /// Modify the exp thershold and set the state to item selection.
     /// </summary>
+    [ContextMenu("levelUp")]
     private void LevelUp()
     {
         currentExp -= expThreshold;

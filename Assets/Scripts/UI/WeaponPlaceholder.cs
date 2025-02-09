@@ -8,7 +8,7 @@ public class WeaponPlaceholder : MonoBehaviour
     [SerializeField] TMP_Text weaponName;
     [SerializeField] TMP_Text weaponDescription;
     [SerializeField] Image weaponSprite;
-    [SerializeField] WeaponBaseDataSO weapon;
+    [SerializeField] ItemSO item;
 
     public void Awake()
     {
@@ -17,12 +17,20 @@ public class WeaponPlaceholder : MonoBehaviour
     }
 
 
-    public void SetWeapon(WeaponBaseDataSO _weapon, int _currentLevel)
+    public void SetActif(ActiveItemSO _item, int _currentLevel)
     {
-        weapon = _weapon;
-        weaponName.text = weapon.weaponName;
-        weaponDescription.text = weapon.levelStats[_currentLevel].levelDescription;
-        weaponSprite.sprite = weapon.weaponSprite;
+        this.item = _item;
+        weaponName.text = this.item.itemName;
+        weaponDescription.text = _item.levelStats[_currentLevel].levelDescription;
+        weaponSprite.sprite = this.item.itemSprite;
+    }
+
+    public void SetPassif(PassifItemSO _item)
+    {
+        item = _item;
+        weaponName.text = item.itemName;
+        weaponDescription.text = _item.description;
+        weaponSprite.sprite = item.itemSprite;
     }
 
     public void OnDestroy()
@@ -32,9 +40,9 @@ public class WeaponPlaceholder : MonoBehaviour
 
     private void OnCLicked()
     {
-        if (weapon == null) return;
+        if (item == null) return;
 
-        WeaponManager.UpdateWeapon(weapon);
+        ItemManager.UpdateItem(item);
         GameManager.SetGameState(GameState.InGame);
     }
 }

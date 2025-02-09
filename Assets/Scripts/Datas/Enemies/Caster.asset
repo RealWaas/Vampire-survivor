@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Caster
   m_EditorClassIdentifier: 
   entityName: Eye
-  healthModifier: 1
-  speedModifier: 1
-  damageModifier: 1
-  cooldownModifier: 1
-  durationModifier: 1
-  projectileSpeedModifier: 1
-  areaSizeModifier: 1
-  piercingBonus: 0
-  projectileCountBonus: 0
+  baseStats:
+    healthModifier: 0.1
+    speedModifier: 1
+    damageModifier: 1
+    cooldownModifier: 1
+    projectilSpeedModifier: 1
+    durationModifier: 1
+    sizeModifier: 1
+    knockbackMultiplier: 1
+    piercingBonus: 0
+    countBonus: 0
   startingWeapon: {fileID: 11400000, guid: f20a3021323b7ec4da6c39ec09156976, type: 2}
-  expAmount: 2
+  expAmount: 5

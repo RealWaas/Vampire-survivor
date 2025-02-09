@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ItemsDrawer : MonoBehaviour
 {
-    [SerializeField] private List<WeaponBaseDataSO> weaponsList = new List<WeaponBaseDataSO>();
+    [SerializeField] private List<ActiveItemSO> actifList = new List<ActiveItemSO>();
+    [SerializeField] private List<PassifItemSO> passifList = new List<PassifItemSO>();
 
     [SerializeField] private WeaponPlaceholder placeholderPrefab;
     [SerializeField] private Transform ChoiceDisplayer;
@@ -13,33 +14,65 @@ public class ItemsDrawer : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.OnItemSelection += SetWeaponChoices;
+        GameManager.OnItemSelection += SetItemChoices;
     }
 
     private void OnDestroy()
     {
-        GameManager.OnItemSelection -= SetWeaponChoices;
+        GameManager.OnItemSelection -= SetItemChoices;
     }
 
-    private List<WeaponBaseDataSO> GetAvailableWeapons()
+    private List<ItemSO> GetAllAvailableItems()
     {
-        List<WeaponBaseDataSO> availableWeapons = weaponsList
+        List<ItemSO> availableItems = new List<ItemSO>();
+
+        // Get all actifs items
+        List<ActiveItemSO> availableActifs = GetAvailableActifs();
+
+        foreach (ActiveItemSO item in availableActifs)
+            availableItems.Add(item);
+
+        // Get all passifs items
+        List<PassifItemSO> availablePassifs = GetAvailablePassifs();
+
+        foreach (PassifItemSO item in availablePassifs)
+            availableItems.Add(item);
+
+        return availableItems;
+    }
+
+    private List<ActiveItemSO> GetAvailableActifs()
+    {
+        return actifList
             .Where(element =>
             {
-                // The player dont have the weapon and have enough space
-                if (!WeaponManager.weaponList.ContainsKey(element) && WeaponManager.weaponList.Count < WeaponManager.MAX_WEAPON_COUNT)
+                // The player dont have the item and have enough space
+                if (!ItemManager.actifList.ContainsKey(element) && ItemManager.actifList.Count < ItemManager.MAX_ACTIVE_COUNT)
                     return true;
 
-                // Return true if the player can upgrade the weapon
-                return WeaponManager.weaponList[element].level < element.levelStats.Count - 1;
+                // Return true if the player can upgrade the item
+                return ItemManager.actifList[element].level < element.levelStats.Count - 1;
             }).ToList();
-
-        return availableWeapons;
     }
 
-    private void SetWeaponChoices()
+    private List<PassifItemSO> GetAvailablePassifs()
     {
-        List<WeaponBaseDataSO> availableWeapons = GetAvailableWeapons();
+        return passifList
+            .Where(element =>
+            {
+                // The player dont have the item and have enough space
+                if (!ItemManager.passifList.ContainsKey(element) && ItemManager.passifList.Count < ItemManager.MAX_PASSIVE_COUNT)
+                    return true;
+
+                // Return true if the player can upgrade the item
+                return ItemManager.passifList[element] < element.maxLevel;
+            }).ToList();
+    }
+
+
+    private void SetItemChoices()
+    {
+        List<ItemSO> availableWeapons = GetAllAvailableItems();
         availableWeapons = ShuffleList(availableWeapons);
 
         ReplaceWeaponChoices(availableWeapons);
@@ -49,26 +82,35 @@ public class ItemsDrawer : MonoBehaviour
     /// Replace the choices in the displayer with new random ones.
     /// </summary>
     /// <param name="_availableChoices"></param>
-    private void ReplaceWeaponChoices(List<WeaponBaseDataSO> _availableChoices)
+    private void ReplaceWeaponChoices(List<ItemSO> _availableChoices)
     {
         // Remove old choices
         foreach (Transform child in ChoiceDisplayer)
             Destroy(child.gameObject);
 
 
-        for (int weaponIndex = 0; weaponIndex < MAX_CHOICES; weaponIndex++)
+        for (int choiceIndex = 0; choiceIndex < MAX_CHOICES; choiceIndex++)
         {
             // If there is no more choice, get out of the for
-            if (_availableChoices.Count < weaponIndex + 1) break;
+            if (_availableChoices.Count < choiceIndex + 1) break;
+
+            ItemSO item = _availableChoices[choiceIndex];
 
             WeaponPlaceholder placeHolder = Instantiate(placeholderPrefab, ChoiceDisplayer);
 
-            // Get the level zero of the wepon, if the player already have the weapon, get the next available level
-            int weaponLevel = 0;
-            if (WeaponManager.weaponList.ContainsKey(_availableChoices[weaponIndex]))
-                weaponLevel = WeaponManager.weaponList[_availableChoices[weaponIndex]].level + 1;
+            if (item is ActiveItemSO)
+            {
+                // Get the level zero of the wepon, if the player already have the weapon, get the next available level
+                int weaponLevel = 0;
+                if (ItemManager.actifList.ContainsKey((ActiveItemSO)item))
+                    weaponLevel = ItemManager.actifList[(ActiveItemSO)item].level + 1;
 
-            placeHolder.SetWeapon(_availableChoices[weaponIndex], weaponLevel);
+                placeHolder.SetActif((ActiveItemSO)item, weaponLevel);
+            }
+            else if (item is PassifItemSO)
+            {
+                placeHolder.SetPassif((PassifItemSO)item);
+            }
         }
     }
 

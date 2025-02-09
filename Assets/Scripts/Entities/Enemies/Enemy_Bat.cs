@@ -7,6 +7,7 @@ public class Enemy_Bat : BaseEnemy
     {
         base.Move(_playerDir);
 
+        enemyRenderer.flipX = targetDirection.x < 0;
         movementHandler.MoveEntity(targetDirection.normalized * BASE_SPEED * stats.speedModifier);
     }
     protected override void ResetMovement()

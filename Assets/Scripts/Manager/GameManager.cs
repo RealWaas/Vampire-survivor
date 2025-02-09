@@ -13,6 +13,7 @@ public static class GameManager
     public static event Action OnItemSelection;
 
     public static event Action OnGameStarted;
+    public static event Action OnGameReset;
     
 
 
@@ -20,6 +21,13 @@ public static class GameManager
     private static void InitGame()
     {
         Application.targetFrameRate = 60;
+        SetGameState(GameState.InMenu);
+    }
+
+    public static void ResetGame()
+    {
+        OnGameReset?.Invoke();
+        PoolManager.ResetPools();
         SetGameState(GameState.InMenu);
     }
 

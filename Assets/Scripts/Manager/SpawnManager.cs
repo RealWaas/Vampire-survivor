@@ -15,12 +15,20 @@ public class SpawnManager : MonoBehaviour
         instance = this;
 
         GameManager.OnGameStarted += StartGame;
+        GameManager.OnGameOverState += EndGame;
     }
 
     private void StartGame()
     {
-        StartCoroutine(spawnVaveCoroutine());
+        // Start spawning the first wave
+        StartCoroutine(spawnWaveCoroutine());
+
         GameManager.SetGameState(GameState.InGame);
+    }
+
+    public void EndGame()
+    {
+        StopAllCoroutines();
     }
 
     private void OnDestroy()
@@ -29,27 +37,72 @@ public class SpawnManager : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public void RespawnEnemy(BaseEnemy _enemy)
+    /// <summary>
+    /// Replace an enemy that get too far from the player.
+    /// </summary>
+    /// <param name="_enemy"></param>
+    public void RespawnEnemy(Transform _enemyTransform)
     {
-        _enemy.transform.position = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
+        _enemyTransform.position = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
     }
 
-    private void SpawnWave(List<EnemyWaveParametter> _waveContent)
-    {
-        foreach(EnemyWaveParametter wave in _waveContent)
-        {
-            for(int spawnAmountIndex = 0; spawnAmountIndex < wave.spawnAmount; spawnAmountIndex++)
-            {
-                GameObject enemy = PoolManager.GetAvailableObjectFromPool(wave.enemy);
 
-                if(!enemy)
-                    SpawnObject(wave.enemy);
-                else
-                    ReSpawnObject(enemy);
-            }
+    /// <summary>
+    /// Return a single random enemy from the given wave by its weight
+    /// </summary>
+    /// <param name="_waveContent"></param>
+    /// <returns></returns>
+    private GameObject GetRandomEnemyFromWave(List<EnemyWaveParametter> _waveContent)
+    {
+        float totalWeight = 0f;
+
+        // Get the total weight of all enemies availables
+        foreach (EnemyWaveParametter enemy in _waveContent)
+            totalWeight += enemy.weight;
+
+        // Get a random weight
+        float randomValue = Random.Range(0, totalWeight);
+        float cumulativeWeight = 0f;
+
+
+        foreach(EnemyWaveParametter enemy in _waveContent)
+        {
+            cumulativeWeight += enemy.weight;
+
+            if (randomValue <= cumulativeWeight)
+                return enemy.prefab;
+        }
+
+        Debug.Log("no ennemy");
+        return null;
+    }
+
+    /// <summary>
+    /// Spawn of respawn all elements of the wave.
+    /// </summary>
+    /// <param name="_wave"></param>
+    private void SpawnWave(WaveSO _wave)
+    {
+        for(int spawnAmountIndex = 0; spawnAmountIndex < _wave.spawnAmount; spawnAmountIndex++)
+        {
+            // Randomly get all enemies
+            GameObject enemyPrefab = GetRandomEnemyFromWave(_wave.waveContent);
+
+            // Try to get an available enemy in the pool manager
+            GameObject enemy = PoolManager.GetAvailableObjectFromPool(enemyPrefab);
+
+            if(!enemy) // If none is available, create a new one
+                SpawnEnemy(enemyPrefab);
+            else // Else, respawn it
+                RespawnEnemy(enemy);
         }
     }
-    private void SpawnObject(GameObject _enemy)
+
+    /// <summary>
+    /// Instantiate a new enemy and add it to the pool.
+    /// </summary>
+    /// <param name="_enemy"></param>
+    private void SpawnEnemy(GameObject _enemy)
     {
         Vector3 relativePos = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
         BaseEnemy enemy = Instantiate(_enemy, relativePos, Quaternion.identity).GetComponent<BaseEnemy>();
@@ -60,7 +113,11 @@ public class SpawnManager : MonoBehaviour
         enemy.ResetEntity(enemy.enemyData);
     }
 
-    private void ReSpawnObject(GameObject _enemy)
+    /// <summary>
+    /// Reset an enemy outside of the screen and reset its stats.
+    /// </summary>
+    /// <param name="_enemy"></param>
+    private void RespawnEnemy(GameObject _enemy)
     {
         Vector3 relativePos = Camera.main.ViewportToWorldPoint(GetRandomSpawnPoint());
         _enemy.SetActive(true);
@@ -71,6 +128,10 @@ public class SpawnManager : MonoBehaviour
         enemy.ResetEntity(enemy.enemyData);
     }
 
+    /// <summary>
+    /// Return a valid spawn point outside of the camera.
+    /// </summary>
+    /// <returns></returns>
     private Vector3 GetRandomSpawnPoint()
     {
         int spawnSide = Random.Range(0, 4);
@@ -110,14 +171,23 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator spawnVaveCoroutine()
+    /// <summary>
+    /// Spawn all waves in chain, taking their duration into account.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator spawnWaveCoroutine()
     {
-        for(int waveIndex = 0; waveIndex <= waveList.Count - 1; waveIndex++)
+        foreach(WaveSO wave in waveList)
         {
-            for(int spawnIndex = 0;  spawnIndex < waveList[waveIndex].spawnCount; spawnIndex++)
+            // get how many time the wave should be spawned
+            float waveAmount = wave.waveDuration / wave.spawnInterval;
+            
+            for (int spawnIndex = 0;  spawnIndex < waveAmount ; spawnIndex++)
             {
-                SpawnWave(waveList[waveIndex].waveContent);
-                yield return new WaitForSeconds(waveList[waveIndex].spawnInterval);
+                SpawnWave(wave);
+
+                // Wait for the interval before respawning the wave
+                yield return new WaitForSeconds(wave.spawnInterval);
             }
         }
     }
