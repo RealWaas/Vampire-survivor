@@ -49,6 +49,7 @@ public abstract class BaseEnemy : Entity
         stats = _entityData.baseStats;
         healthSystem.ResetHealth(BASE_HEALTH * stats.healthModifier);
         ResetMovement();
+        isAlive = true;
     }
 
     protected override void TakeDamage(float _knockBack)
@@ -61,8 +62,13 @@ public abstract class BaseEnemy : Entity
 
     protected override void HandleDeath()
     {
-        DropItemOnDeath();
+        // Ensure the enemy doesn't drop multiple items on death
+        if (!isAlive) return;
 
+        isAlive = false;
+
+        DropItemOnDeath();
+            
         // make the enemy available from the pool
         gameObject.SetActive(false);
     }

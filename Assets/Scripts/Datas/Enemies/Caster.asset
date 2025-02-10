@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: Eye
   baseStats:
-    healthModifier: 0.1
+    healthModifier: 0.3
     speedModifier: 1
     damageModifier: 1
     cooldownModifier: 1

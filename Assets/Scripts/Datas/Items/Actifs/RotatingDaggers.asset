@@ -14,17 +14,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rotating dagger
   itemSprite: {fileID: 503644337, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
-  attackPrefab: {fileID: 3399815073018679307, guid: abf12276e1733db4e94b2b6c6362cee3, type: 3}
+  attackPrefab: {fileID: 3132396503068579526, guid: e505fd7a04828474eb508d79fa2b198c, type: 3}
   weaponSystem: {fileID: 8563488376997753339, guid: c552677570c1b6b459b680d2a22cc6ee, type: 3}
-  attackOffset: {x: 0, y: 0, z: 0}
+  attackOffset: {x: 0, y: 1, z: 0}
   levelStats:
   - levelDescription: Make magic daggers appears around the player
-    damage: 1
+    damage: 3
     cooldown: 5
-    speed: 100
-    duration: 3
-    size: 3
+    speed: 1
+    duration: 5
+    size: 1
     knockBack: 0.2
     interval: 0
     piercing: 0
     count: 2
+  - levelDescription: Level 1:<br>Duration + 0.25s<br>Speed +0.25s
+    damage: 3
+    cooldown: 5
+    speed: 1.25
+    duration: 5.25
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 2
+  - levelDescription: Level 2:<br>Duration + 0.25s<br>Speed +0.25s
+    damage: 1
+    cooldown: 5
+    speed: 1.5
+    duration: 5.5
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 2
+  - levelDescription: Level 3:<br>Count +1<br>BaseDamages + 1
+    damage: 4
+    cooldown: 5
+    speed: 1.5
+    duration: 5.5
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 3
+  - levelDescription: Level 4:<br>Duration + 0.25s<br>Speed +0.25s
+    damage: 4
+    cooldown: 5
+    speed: 1.75
+    duration: 5.75
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 3
+  - levelDescription: Level 5:<br>Count +1<br>BaseDamages + 1
+    damage: 5
+    cooldown: 5
+    speed: 1.75
+    duration: 5.75
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 4
+  - levelDescription: Level 6:<br>Duration + 0.25s<br>Speed +0.25s
+    damage: 5
+    cooldown: 5
+    speed: 2
+    duration: 6
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 5
+  - levelDescription: Level 7:<br>Count +1<br>BaseDamages + 1
+    damage: 6
+    cooldown: 5
+    speed: 2
+    duration: 6
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 5
+  - levelDescription: Level 8:<br>Count +1<br>BaseDamages + 1
+    damage: 7
+    cooldown: 5
+    speed: 2
+    duration: 6
+    size: 1
+    knockBack: 0.2
+    interval: 0
+    piercing: 0
+    count: 6

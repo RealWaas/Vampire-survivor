@@ -16,13 +16,13 @@ MonoBehaviour:
   baseStats:
     healthModifier: 1
     speedModifier: 1.4
-    damageModifier: 1
-    cooldownModifier: 1
-    projectilSpeedModifier: 1
+    damageModifier: 1.2
+    cooldownModifier: 1.2
+    projectilSpeedModifier: 1.2
     durationModifier: 1
     sizeModifier: 1
-    knockbackMultiplier: 0
+    knockbackMultiplier: 1
     piercingBonus: 0
-    countBonus: 0
+    countBonus: 1
   startingWeapon: {fileID: 11400000, guid: 440f12d753cc67c42adde261ebb13b50, type: 2}
   characterRender: {fileID: 9121299221776275129, guid: 458bf8682e568854690ffd2a3044d3cf, type: 3}

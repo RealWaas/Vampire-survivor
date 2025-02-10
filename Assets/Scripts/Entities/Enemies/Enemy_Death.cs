@@ -76,6 +76,11 @@ public class Enemy_Death : BaseEnemy
 
     protected override void HandleDeath()
     {
+        // Ensure the enemy doesn't drop multiple items on death
+        if (!isAlive) return;
+
+        isAlive = false;
+
         gameObject.SetActive(false);
         GameManager.SetGameState(GameState.GameOver);
     }

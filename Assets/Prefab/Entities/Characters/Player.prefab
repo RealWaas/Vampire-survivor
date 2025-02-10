@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 8482535261880809999}
   - component: {fileID: 6373596890847049214}
   - component: {fileID: 7150587446554917818}
-  - component: {fileID: 2834775701950906226}
+  - component: {fileID: 875085874268796326}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSystem: {fileID: 6373596890847049214}
+  weaponHolder: {fileID: 0}
   input: {fileID: 3351054682447228417}
 --- !u!50 &5328164533067831439
 Rigidbody2D:
@@ -423,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363371cdfdd5f774ca0f3a10454ed45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2834775701950906226
+--- !u!114 &875085874268796326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

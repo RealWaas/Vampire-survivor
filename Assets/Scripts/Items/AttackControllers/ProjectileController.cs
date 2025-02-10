@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RotatingDaggerController : AttackController
+public class ProjectileController : AttackController
 {
     protected override void Update()
     {

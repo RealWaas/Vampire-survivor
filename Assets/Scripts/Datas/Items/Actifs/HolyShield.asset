@@ -20,31 +20,81 @@ MonoBehaviour:
   levelStats:
   - levelDescription: Make a damage zone appear at a random enemy location
     damage: 2
-    cooldown: 5
+    cooldown: 7
     speed: 0
     duration: 3
     size: 1
-    knockBack: 0
-    interval: 0
+    knockBack: 1
+    interval: 0.5
     piercing: 0
-    count: 5
-  - levelDescription: size + 50%
+    count: 1
+  - levelDescription: Level 2:<br>Cooldown -0.5s<br>Size + 20%
     damage: 2
+    cooldown: 6.5
+    speed: 0
+    duration: 3
+    size: 1.2
+    knockBack: 1
+    interval: 0.5
+    piercing: 0
+    count: 1
+  - levelDescription: Level 3:<br>Count +1
+    damage: 2
+    cooldown: 6.5
+    speed: 0
+    duration: 3
+    size: 1.2
+    knockBack: 1
+    interval: 0.5
+    piercing: 0
+    count: 2
+  - levelDescription: Level 4:<br>Cooldown -0.5s<br>Size +20%
+    damage: 2
+    cooldown: 6
+    speed: 0
+    duration: 3
+    size: 1.4
+    knockBack: 1
+    interval: 0.5
+    piercing: 0
+    count: 2
+  - levelDescription: Level 5:<br>base damages + 2
+    damage: 4
+    cooldown: 6
+    speed: 0
+    duration: 3
+    size: 1.4
+    knockBack: 1
+    interval: 0.5
+    piercing: 0
+    count: 2
+  - levelDescription: Level 6:<br>Cooldown -0.5s<br>Size + 20%
+    damage: 4
+    cooldown: 5.5
+    speed: 0
+    duration: 3
+    size: 1.6
+    knockBack: 1
+    interval: 0.5
+    piercing: 0
+    count: 2
+  - levelDescription: Level 7:<br>Base damages +2<br>Count +1
+    damage: 6
+    cooldown: 5.5
+    speed: 0
+    duration: 3
+    size: 1.6
+    knockBack: 1
+    interval: 0.5
+    piercing: 0
+    count: 3
+  - levelDescription: Level 8:<br>Size + 20%<br>Cooldown -0.5s
+    damage: 6
     cooldown: 5
     speed: 0
     duration: 3
-    size: 1.5
-    knockBack: 0
-    interval: 0
+    size: 1.8
+    knockBack: 1
+    interval: 0.5
     piercing: 0
-    count: 5
-  - levelDescription: size + 50%
-    damage: 2
-    cooldown: 5
-    speed: 0
-    duration: 3
-    size: 2
-    knockBack: 0
-    interval: 0
-    piercing: 0
-    count: 5
+    count: 3

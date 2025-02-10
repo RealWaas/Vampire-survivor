@@ -4,7 +4,7 @@ using UnityEngine;
 public class ExpSystem : MonoBehaviour
 {
     private const float BASE_EXP_THRESHOLD = 5;
-    private const float LEVEL_THRESHOLD_MULTIPLIER = 1.5f;
+    private const float LEVEL_THRESHOLD_MULTIPLIER = 1.25f;
     public float expThreshold { get; private set; } = BASE_EXP_THRESHOLD;
     public float currentExp { get; private set; } = 0;
 

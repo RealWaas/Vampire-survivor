@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: Skull
   baseStats:
-    healthModifier: 0.1
+    healthModifier: 0.2
     speedModifier: 0.5
     damageModifier: 5
     cooldownModifier: 1

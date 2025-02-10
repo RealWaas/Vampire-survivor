@@ -12,6 +12,8 @@ public abstract class Entity : MonoBehaviour
     protected const float BASE_SPEED = 1;
     protected const float BASE_DAMAGE = 1;
 
+    protected bool isAlive = false;
+
     public EntityStats stats { get; protected set; }
 
     protected virtual void Awake()

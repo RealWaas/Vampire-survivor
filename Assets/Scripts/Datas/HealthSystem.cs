@@ -6,6 +6,8 @@ public class HealthSystem : MonoBehaviour, IDamagable
     public event Action OnHealthUpdated;
     public event Action OnHealthEmpty;
     public event Action<float> OnTakeDamage;
+
+    [SerializeField] private bool isVulnerable = true;
     public float maxHealth { get; private set; }
 
     private float Health;
@@ -45,6 +47,8 @@ public class HealthSystem : MonoBehaviour, IDamagable
     /// <param name="_knockBack"></param>
     public void TakeDamage(float _damage, float _knockBack = 0)
     {
+        if (!isVulnerable) return;
+
         health -= _damage;
         OnTakeDamage?.Invoke(_knockBack);
 

@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: Knight
   baseStats:
-    healthModifier: 1
+    healthModifier: 1.2
     speedModifier: 1.4
-    damageModifier: 1
+    damageModifier: 1.2
     cooldownModifier: 1
     projectilSpeedModifier: 1
     durationModifier: 1
     sizeModifier: 1
-    knockbackMultiplier: 0
+    knockbackMultiplier: 1
     piercingBonus: 0
     countBonus: 0
   startingWeapon: {fileID: 11400000, guid: ea1bf1f20165a164cb19941ecade25ae, type: 2}

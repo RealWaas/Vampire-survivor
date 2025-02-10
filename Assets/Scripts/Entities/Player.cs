@@ -14,8 +14,6 @@ public class Player : Entity
 
     private CharacterDataSO characterData;
 
-    private bool isAlive = false;
-
     private Vector3 originalPosition = Vector3.zero;
 
     protected override void Awake()
